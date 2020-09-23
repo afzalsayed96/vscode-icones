@@ -2,9 +2,9 @@
 Icônes
 </h1>
 
-<p align="center">Icon Explorer with <b>Instant</b> searching, powered by <a href="https://github.com/antfu/icones" target="_blank">Icones</a> </p>
+<p align="center">Icon Explorer with <b>Instant</b> searching, powered by <a href="https://github.com/antfu/icones" target="_blank">Icones</a>, powered by <a href="https://github.com/iconify/iconify">Iconify</a> </p>
 
-## Usage
+### Usage
 
 1. Open command palette with `cmd+shift+p`
 2. Enter command `Icones: Find icons`
@@ -32,6 +32,6 @@ Icônes
 - Categories filters
 - Dark mode
 
-## License & Credits
+### Credits
 
-MIT - Anthony Fu 2020
+This project is based off [Anthony Fu's Icones](https://github.com/antfu/icons). If you found it useful, give them a star on GitHub and consider buying their author a coffee/beer <3

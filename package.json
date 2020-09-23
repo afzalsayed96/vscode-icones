@@ -5,6 +5,8 @@
 	"repository": {
 		"url": "https://github.com/afzalsayed96/vscode-icones"
 	},
+	"publisher": "afzalsayed96",
+	"license": "MIT",
 	"icon": "./icon.png",
 	"version": "0.0.1",
 	"engines": {
