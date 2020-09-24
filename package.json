@@ -1,14 +1,14 @@
 {
   "name": "icones",
-	"displayName": "Icones",
-	"description": "SVG, JSX, TSX, Vue, Font iconsets",
+	"displayName": "Icônes",
+	"description": "Icon Explorer with Instant searching, powered by Iconify",
 	"repository": {
 		"url": "https://github.com/afzalsayed96/vscode-icones"
 	},
 	"publisher": "afzalsayed96",
 	"license": "MIT",
-	"icon": "./icon.png",
-	"version": "0.0.1",
+	"icon": "icon.png",
+	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.49.0"
 	},
@@ -23,7 +23,7 @@
 		"commands": [
 			{
 				"command": "icones.find",
-				"title": "Icones: Find icons"
+				"title": "Icônes: Find icons"
 			}
 		]
 	},

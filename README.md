@@ -2,12 +2,16 @@
 Icônes
 </h1>
 
-<p align="center">Icon Explorer with <b>Instant</b> searching, powered by <a href="https://github.com/antfu/icones" target="_blank">Icones</a>, powered by <a href="https://github.com/iconify/iconify">Iconify</a> </p>
+<p align="center">Icon Explorer with <b>Instant</b> searching, powered by <a href="https://github.com/iconify/iconify" target="_blank">Iconify</a></p>
 
 ### Usage
 
 1. Open command palette with `cmd+shift+p`
 2. Enter command `Icones: Find icons`
+
+![](./screenshots/demo.gif)
+
+### Screenshots
 
 ![](./screenshots/1.png)
 ![](./screenshots/2.png)
@@ -31,6 +35,10 @@ Icônes
 - Collection bookmarks
 - Categories filters
 - Dark mode
+
+### Todo
+
+- Make downloads work
 
 ### Credits
 
