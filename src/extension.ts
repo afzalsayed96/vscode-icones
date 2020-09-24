@@ -5,11 +5,6 @@ import * as vscode from 'vscode';
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "icones" is now active!');
-
 	let currentPanel: vscode.WebviewPanel | undefined = undefined;
 
 
@@ -30,7 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
 
        currentPanel = vscode.window.createWebviewPanel(
         'icones', // Identifies the type of the webview. Used internally
-        'Icones', // Title of the panel displayed to the user
+        'Icônes', // Title of the panel displayed to the user
         vscode.ViewColumn.Beside, // Editor column to show the new webview panel in.
         {
 					enableScripts: true,
@@ -58,24 +53,25 @@ export function deactivate() {}
 
 function getWebviewContent() {
   return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>React Icons</title>
-		<style>
-		.full {
-			height: 100vh;
-			width: 100vw;
-			margin: 0;
-			border: 0;
-			outline: none;
-		}
-		
-		</style>
-</head>
-<body class="full">
-    <iframe src="https://icones-sandy.vercel.app/" class="full" sandbox="allow-scripts allow-same-origin">/>
-</body>
-</html>`;
+	<html lang="en">
+	<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>Icônes</title>
+			<style>
+			.full {
+				height: 100vh;
+				width: 100vw;
+				margin: 0;
+				padding: 0;
+				border: 0;
+				outline: none;
+			}
+			
+			</style>
+	</head>
+	<body class="full">
+			<iframe src="https://icones-sandy.vercel.app/" class="full" sandbox="allow-scripts allow-same-origin">/>
+	</body>
+	</html>`;
 }
