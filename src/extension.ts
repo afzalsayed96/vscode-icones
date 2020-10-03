@@ -1,16 +1,11 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+const path = require('path');
+const fs =require('fs');
+
 export function activate(context: vscode.ExtensionContext) {
 	let currentPanel: vscode.WebviewPanel | undefined = undefined;
 
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
 	let disposable = vscode.commands.registerCommand('icones.find', () => {
 
 		const columnToShowIn = vscode.window.activeTextEditor
@@ -23,16 +18,20 @@ export function activate(context: vscode.ExtensionContext) {
 		} else {
 			// Otherwise, create a new panel
 
+			const htmlPath = path.join(context.extensionPath, 'web', 'dist', 'index.html');
+
        currentPanel = vscode.window.createWebviewPanel(
         'icones', // Identifies the type of the webview. Used internally
         'Icônes', // Title of the panel displayed to the user
         vscode.ViewColumn.Beside, // Editor column to show the new webview panel in.
         {
 					enableScripts: true,
-					retainContextWhenHidden: true
+					retainContextWhenHidden: true,
+					localResourceRoots: [vscode.Uri.file(path.dirname(htmlPath))]
 				}
-      );
-			currentPanel.webview.html = getWebviewContent();
+			);
+			
+			currentPanel.webview.html = getHtml4Path(htmlPath, currentPanel);
 
 			// Reset when the current panel is closed
 			currentPanel.onDidDispose(
@@ -48,30 +47,36 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(disposable);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}
 
-function getWebviewContent() {
-  return `<!DOCTYPE html>
-	<html lang="en">
-	<head>
-			<meta charset="UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title>Icônes</title>
-			<style>
-			.full {
-				height: 100vh;
-				width: 100vw;
-				margin: 0;
-				padding: 0;
-				border: 0;
-				outline: none;
+// https://github.com/leocll/vscode-extension-webview-template/blob/master/src/vscode/vscode.webview.js
+function getHtml4Path(htmlPath: string, panel: vscode.WebviewPanel) {
+	const scheme = panel.webview.cspSource ? panel.webview.cspSource.split(':')[0] : 'vscode-resource';
+	const dirPath = path.dirname(htmlPath);
+	let html = fs.readFileSync(htmlPath, 'utf-8');
+	// @ts-ignore
+	html = html.replace(/(href=|src=)(.+?)(\ |>)/g, (m, $1, $2, $3) => {
+			let uri = $2;
+			uri = uri.replace('"', '').replace("'", '');
+			uri.indexOf('/') === 0 && (uri = `.${uri}`);
+			if (uri.substring(0, 1) === ".") {
+					const furi = vscode.Uri.file(path.resolve(dirPath, uri));
+					if (panel.webview.asWebviewUri) {
+							uri = `${$1}${panel.webview.asWebviewUri(furi)}${$3}`;
+					} else {
+							uri = `${$1}${furi.with({ scheme }).toString()}${$3}`;
+					}
+					return uri.replace('%22', '');
 			}
-			
-			</style>
-	</head>
-	<body class="full">
-			<iframe src="https://icones-sandy.vercel.app/" class="full" sandbox="allow-scripts allow-same-origin">/>
-	</body>
-	</html>`;
+			return m;
+	});
+
+	html = html.replace(/<head>/gm, () =>	`<head>
+		<script>
+			window.staticURI = "${panel.webview.asWebviewUri(vscode.Uri.file(path.resolve(dirPath)))}"
+			window.baseURI = '/electron-browser/index.html/'
+		</script>
+	`);
+
+	return html;
 }
