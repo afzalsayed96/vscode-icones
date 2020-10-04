@@ -8,7 +8,7 @@
 	"publisher": "afzalsayed96",
 	"license": "MIT",
 	"icon": "icon.png",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"engines": {
 		"vscode": "^1.49.0"
 	},
@@ -28,7 +28,7 @@
 		]
 	},
 	"scripts": {
-		"vscode:prepublish": "yarn run compile",
+		"vscode:prepublish": "cd web && yarn build && cd - && yarn run compile",
 		"compile": "tsc -p ./",
 		"lint": "eslint src --ext ts",
 		"watch": "tsc -watch -p ./",

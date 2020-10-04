@@ -10,3 +10,5 @@ vsc-extension-quickstart.md
 **/*.map
 **/*.ts
 .env
+web/
+!web/dist
