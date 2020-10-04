@@ -1,8 +1,14 @@
 <h1 align="center">
-Icônes
+  Icônes for VS Code
 </h1>
 
-<p align="center">Icon Explorer with <b>Instant</b> searching, powered by <a href="https://github.com/iconify/iconify" target="_blank">Iconify</a></p>
+<p align="center">VS Code Extenstion for <a href="https://github.com/antfu/icones">Icônes</a>, an Icon Explorer with <b>Instant</b> searching powered by <a href="https://github.com/iconify/iconify" target="_blank">Iconify</a></p>
+
+<p align="center">
+  <a href='https://marketplace.visualstudio.com/items?itemName=afzalsayed96.icones'>
+    <img alt="Visual Studio Marketplace Version" src="https://img.shields.io/visual-studio-marketplace/v/afzalsayed96.icones?color=%2342b883&label=VS%20Code%20Marketplace&logo=visual-studio-code">
+  </a>
+</p>
 
 ### Usage
 
