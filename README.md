@@ -44,7 +44,7 @@
 
 ### Todo
 
-- Make downloads work
+- Make SVG Zip downloads work
 
 ### Credits
 
