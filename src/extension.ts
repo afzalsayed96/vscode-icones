@@ -33,6 +33,33 @@ export function activate(context: vscode.ExtensionContext) {
 			
 			currentPanel.webview.html = getHtml4Path(htmlPath, currentPanel);
 
+			 // Handle messages from the webview
+			 currentPanel.webview.onDidReceiveMessage(
+        message => {
+          switch (message.command) {
+            case 'download':
+							vscode.window.showSaveDialog({
+								defaultUri: vscode.Uri.parse('file:' + path.join(vscode.workspace?.rootPath || context.extensionPath, message.name))
+							}).then(file => {
+								if (file?.path) {
+									try {
+										fs.writeFileSync(file?.path, message.text)
+										vscode.window.showInformationMessage('File saved!')
+									} catch {
+									vscode.window.showErrorMessage('File not saved')
+									}
+								} else {
+									vscode.window.showInformationMessage('File not saved')
+								}
+							});							
+						
+						return;
+          }
+        },
+        undefined,
+        context.subscriptions
+      );
+
 			// Reset when the current panel is closed
 			currentPanel.onDidDispose(
 				() => {
@@ -73,6 +100,7 @@ function getHtml4Path(htmlPath: string, panel: vscode.WebviewPanel) {
 
 	html = html.replace(/<head>/gm, () =>	`<head>
 		<script>
+			window.vscode = acquireVsCodeApi()
 			window.staticURI = "${panel.webview.asWebviewUri(vscode.Uri.file(path.resolve(dirPath)))}"
 			window.baseURI = '/electron-browser/index.html/'
 		</script>
