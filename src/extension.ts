@@ -41,9 +41,15 @@ export function activate(context: vscode.ExtensionContext) {
               vscode.window.showSaveDialog({
                 defaultUri: vscode.Uri.parse('file:' + path.join(vscode.workspace?.rootPath || context.extensionPath, message.name))
               }).then(file => {
+                const buffer = new ArrayBuffer(message?.text.length*2);
+                var typedArr = new Uint16Array(buffer);
+                for (var i=0, strLen=message?.text.length; i < strLen; i++) {
+                  typedArr[i] = message?.text.charCodeAt(i);
+                }
+
                 if (file?.path) {
                   try {
-                    fs.writeFileSync(file?.path, message.text)
+                    fs.writeFileSync(file?.path, typedArr)
                     vscode.window.showInformationMessage('File saved!')
                   } catch {
                   vscode.window.showErrorMessage('File not saved')
