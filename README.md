@@ -44,4 +44,4 @@
 
 ### Credits
 
-This project is based off [Anthony Fu's Icones](https://github.com/antfu/icons). If you found it useful, give them a star on GitHub and consider buying their author a coffee/beer <3
+This project is based off [Anthony Fu's Icones](https://github.com/antfu/icones). If you found it useful, give them a star on GitHub and consider buying their author a coffee/beer <3
