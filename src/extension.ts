@@ -108,7 +108,7 @@ function getHtml4Path(htmlPath: string, panel: vscode.WebviewPanel) {
     <script>
       window.vscode = acquireVsCodeApi()
       window.staticURI = "${panel.webview.asWebviewUri(vscode.Uri.file(path.resolve(dirPath)))}"
-      window.baseURI = '/electron-browser/index.html/'
+      window.baseURI = '/index.html/'
     </script>
   `);
 
