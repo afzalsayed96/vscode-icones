@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
 const path = require('path');
-const fs =require('fs');
+const fs = require('fs');
 
 export function activate(context: vscode.ExtensionContext) {
   let currentPanel: vscode.WebviewPanel | undefined = undefined;
@@ -49,16 +49,15 @@ export function activate(context: vscode.ExtensionContext) {
 
                 if (file?.path) {
                   try {
-                    fs.writeFileSync(file?.path, typedArr)
-                    vscode.window.showInformationMessage('File saved!')
+                    fs.writeFileSync(file?.path, typedArr);
+                    vscode.window.showInformationMessage('File saved!');
                   } catch {
-                  vscode.window.showErrorMessage('File not saved')
+                  vscode.window.showErrorMessage('File not saved');
                   }
                 } else {
-                  vscode.window.showInformationMessage('File not saved')
+                  vscode.window.showInformationMessage('File not saved');
                 }
-              });							
-            
+              });
             return;
           }
         },
@@ -84,7 +83,29 @@ export function deactivate() {}
 
 // https://github.com/leocll/vscode-extension-webview-template/blob/master/src/vscode/vscode.webview.js
 function getHtml4Path(htmlPath: string, panel: vscode.WebviewPanel) {
-  const scheme = panel.webview.cspSource ? panel.webview.cspSource.split(':')[0] : 'vscode-resource';
+  return `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Icônes</title>
+      <style>
+      .full {
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: none;
+      }
+      
+      </style>
+  </head>
+  <body class="full">
+    <iframe src="https://icones.js.org" class="full" sandbox="allow-scripts allow-same-origin">/>
+  </body>
+  </html>`;
+  /* const scheme = panel.webview.cspSource ? panel.webview.cspSource.split(':')[0] : 'vscode-resource';
   const dirPath = path.dirname(htmlPath);
   let html = fs.readFileSync(htmlPath, 'utf-8');
   // @ts-ignore
@@ -112,5 +133,5 @@ function getHtml4Path(htmlPath: string, panel: vscode.WebviewPanel) {
     </script>
   `);
 
-  return html;
+  return html; */
 }

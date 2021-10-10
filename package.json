@@ -28,7 +28,7 @@
 		]
 	},
 	"scripts": {
-		"vscode:prepublish": "cd web && yarn build && cd - && yarn run compile",
+		"vscode:prepublish": "yarn run compile",
 		"compile": "tsc -p ./",
 		"lint": "eslint src --ext ts",
 		"watch": "tsc -watch -p ./",
